@@ -141,10 +141,10 @@ endif
 all: lib/libxgboost.a $(XGBOOST_DYLIB) xgboost
 
 $(DMLC_CORE)/libdmlc.a: $(wildcard $(DMLC_CORE)/src/*.cc $(DMLC_CORE)/src/*/*.cc)
-	+ cd $(DMLC_CORE); $(MAKE) libdmlc.a config=$(ROOTDIR)/$(config); cd $(ROOTDIR)
+	+ cd $(DMLC_CORE); "$(MAKE)" libdmlc.a config=$(ROOTDIR)/$(config); cd $(ROOTDIR)
 
 $(RABIT)/lib/$(LIB_RABIT): $(wildcard $(RABIT)/src/*.cc)
-	+ cd $(RABIT); $(MAKE) lib/$(LIB_RABIT) USE_SSE=$(USE_SSE); cd $(ROOTDIR)
+	+ cd $(RABIT); "$(MAKE)" lib/$(LIB_RABIT) USE_SSE=$(USE_SSE); cd $(ROOTDIR)
 
 jvm: jvm-packages/$(XGBOOST4J_DYLIB)
 
@@ -217,7 +217,6 @@ pylint:
 	flake8 --ignore E501 tests/python
 
 test: $(ALL_TEST)
-	./plugin/updater_gpu/test/cpp/generate_data.sh
 	$(ALL_TEST)
 
 check: test
@@ -236,8 +235,8 @@ clean:
 	cd R-package/src; $(RM) -rf rabit src include dmlc-core amalgamation *.so *.dll; cd $(ROOTDIR)
 
 clean_all: clean
-	cd $(DMLC_CORE); $(MAKE) clean; cd $(ROOTDIR)
-	cd $(RABIT); $(MAKE) clean; cd $(ROOTDIR)
+	cd $(DMLC_CORE); "$(MAKE)" clean; cd $(ROOTDIR)
+	cd $(RABIT); "$(MAKE)" clean; cd $(ROOTDIR)
 
 doxygen:
 	doxygen doc/Doxyfile
