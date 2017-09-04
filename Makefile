@@ -97,7 +97,7 @@ ifeq ($(UNAME), Darwin)
 	CFLAGS += -fPIC
 else
 	XGBOOST_DYLIB = lib/libxgboost.so
-	XGBOOST4J_DYLIB = lib/libxgboost4j.dylib
+	XGBOOST4J_DYLIB = lib/libxgboost4j.so
 	CFLAGS += -fPIC
 endif
 endif
